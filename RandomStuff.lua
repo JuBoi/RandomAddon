@@ -22,8 +22,6 @@ function Sound_Play(wat, potato)
 	PlaySoundFile(directory..sounds[wat][potato]);
 end
 
-print("wtf")
-
 local frame = CreateFrame("FRAME")
 frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED");
 frame:SetScript("OnEvent", function(self, event, ...)
@@ -32,6 +30,7 @@ frame:SetScript("OnEvent", function(self, event, ...)
 	destRaidFlags = ...
 
 	if(event == "COMBAT_LOG_EVENT_UNFILTERED") then
+
 		if(type == "UNIT_DIED") then
 			local recapID, unconsciousOnDeath = select(12, ...)
 			if(destGUID == "Player-3676-06F45848") then
@@ -45,26 +44,23 @@ frame:SetScript("OnEvent", function(self, event, ...)
 			overkill, school, resisted, blocked, absorbed, 
 			critical, glancing, crushing = select(12, ...)
 
-			if (spellId == 215279) then 
-				--print("DR CHAOS BOLT")
+			if ((spellId == 215279) and (sourceFlags == 8465)) then 
 				--print("CHAOS")
 				Sound_Play("spells", 1)
 			end
 			--[[if(spellId == 116858) then
 				print("REG CHAOS BOLT")
 			end]]
-			if(spellId == 348) then
-				--print("IMMOLATED")
+			if((spellId == 348) or (sourceGUID == "Player-3676-06F45848")) then
 				Sound_Play("spells", 2)
 			end
+			if((spellId == 187394) and (sourceFlags == 8465)) then
 
-			if(spellId == 187394) then
-				--print("RATATATA")
 				Sound_Play("spells", 3)
 			end
 
-			if(spellId == 196657) then
-				--print("SPOOKY")
+			if((spellId == 196657) and (sourceFlags == 8465)) then
+
 				Sound_Play("spells", 4)
 			end
 		end
