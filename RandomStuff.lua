@@ -51,7 +51,7 @@ frame:SetScript("OnEvent", function(self, event, ...)
 			--[[if(spellId == 116858) then
 				print("REG CHAOS BOLT")
 			end]]
-			if((spellId == 348) or (sourceGUID == "Player-3676-06F45848")) then
+			if((spellId == 116858) and (sourceGUID == "Player-3676-06F45848")) then
 				Sound_Play("spells", 2)
 			end
 			if((spellId == 187394) and (sourceFlags == 8465)) then
