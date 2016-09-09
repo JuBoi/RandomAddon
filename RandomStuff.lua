@@ -1,18 +1,28 @@
-SLASH_RELOADUI1 = "/rl" -- For quicker reloading
+SLASH_RELOADUI1 = "/potato" -- For quicker reloading
 SlashCmdList.RELOADUI = ReloadUI
 
 ----------------------------------------------------------------
---[[local directory = "Interface\\Addons\\RandomStuff\\RandomSounds\\";
+local directory = "Interface\\Addons\\RandomStuff\\Sounds\\";
 
 local sounds = {
 	
-	death = { "MarioDeath.ogg"},
-}]]
+	death = { 
+				"MarioDeath.ogg",
+			},
 
---[[function Sound_Play(wat)
-	PlaySoundFile(directory..sounds[wat][1]);
-end]]
+	spells = { 
+				"MoveBitch.ogg", 
+				"BurnBabyBurn.ogg",
+				"LaserGun.ogg",
+				"smb_bump.ogg",
+			 },
+}
 
+function Sound_Play(wat, potato)
+	PlaySoundFile(directory..sounds[wat][potato]);
+end
+
+print("wtf")
 
 local frame = CreateFrame("FRAME")
 frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED");
@@ -25,7 +35,7 @@ frame:SetScript("OnEvent", function(self, event, ...)
 		if(type == "UNIT_DIED") then
 			local recapID, unconsciousOnDeath = select(12, ...)
 			if(destGUID == "Player-3676-06F45848") then
-				PlaySoundFile("Interface\\Addons\\RandomStuff\\Sounds\\MarioDeath.ogg")
+				Sound_Play("death", 1)
 			end
 		end
 
@@ -36,20 +46,26 @@ frame:SetScript("OnEvent", function(self, event, ...)
 			critical, glancing, crushing = select(12, ...)
 
 			if (spellId == 215279) then 
-				print("DR CHAOS BOLT")
-				--PlaySoundFile("Interface\\Addons\\RandomStuff\\Sounds\\BurnBabyBurn.ogg");
+				--print("DR CHAOS BOLT")
+				--print("CHAOS")
+				Sound_Play("spells", 1)
 			end
-			if(spellId == 116858) then
+			--[[if(spellId == 116858) then
 				print("REG CHAOS BOLT")
+			end]]
+			if(spellId == 348) then
+				--print("IMMOLATED")
+				Sound_Play("spells", 2)
 			end
-			if(spellId == 196586) then
-				print("DRIFT")
-			end
+
 			if(spellId == 187394) then
-				print("MACHINE GUN")
+				--print("RATATATA")
+				Sound_Play("spells", 3)
 			end
+
 			if(spellId == 196657) then
-				print("SHADOW BOLTS")
+				--print("SPOOKY")
+				Sound_Play("spells", 4)
 			end
 		end
 	end
