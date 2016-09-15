@@ -1,4 +1,4 @@
-SLASH_RELOADUI1 = "/potato" -- For quicker reloading
+SLASH_RELOADUI1 = "/rl" -- For quicker reloading
 SlashCmdList.RELOADUI = ReloadUI
 
 ----------------------------------------------------------------
