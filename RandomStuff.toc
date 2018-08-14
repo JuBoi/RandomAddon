@@ -1,7 +1,8 @@
-## Interface: 70000
+## Interface: 80000
 ## Title: Random Stuff
+## Notes: This is spicy
 ## Author: Bryan Ju
-## Version: 0.1
-## DefaultState: enabled
+## Version: 1.0.0
+## DefaultState: Enabled
 
 RandomStuff.lua

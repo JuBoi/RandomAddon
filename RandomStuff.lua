@@ -25,43 +25,28 @@ end
 local frame = CreateFrame("FRAME")
 frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED");
 frame:SetScript("OnEvent", function(self, event, ...)
-	local timestamp, type, hideCaster, sourceGUID, sourceName, 
-	sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, 
-	destRaidFlags = ...
 
-	if(event == "COMBAT_LOG_EVENT_UNFILTERED") then
+	local timestamp, combatevent, hideCaster, sourceGUID, sourceName, 
+		sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, 
+		destRaidFlags = CombatLogGetCurrentEventInfo()
 
-		if(type == "UNIT_DIED") then
+	if (event == "COMBAT_LOG_EVENT_UNFILTERED") then
+
+		if (combatevent == "UNIT_DIED") then
 			local recapID, unconsciousOnDeath = select(12, ...)
 			if(destGUID == "Player-3676-06F45848") then
 				Sound_Play("death", 1)
 			end
 		end
 
-		if(type == "SPELL_DAMAGE") then
+		if (combatevent == "SPELL_DAMAGE") then
 
 			local spellId, spellName, spellSchool, amount, 
 			overkill, school, resisted, blocked, absorbed, 
-			critical, glancing, crushing = select(12, ...)
-
-			if ((spellId == 215279) and (sourceFlags == 8465)) then 
-				--print("CHAOS")
-				Sound_Play("spells", 1)
-			end
-			--[[if(spellId == 116858) then
-				print("REG CHAOS BOLT")
-			end]]
+			critical = select(12, CombatLogGetCurrentEventInfo())
 			if((spellId == 116858) and (sourceGUID == "Player-3676-06F45848")) then
+				-- print("CHAOS BOLT");
 				Sound_Play("spells", 2)
-			end
-			if((spellId == 187394) and (sourceFlags == 8465)) then
-
-				Sound_Play("spells", 3)
-			end
-
-			if((spellId == 196657) and (sourceFlags == 8465)) then
-
-				Sound_Play("spells", 4)
 			end
 		end
 	end
